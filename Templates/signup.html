@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            background-color: powderblue;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        input {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: powderblue;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: deepskyblue;
+        }
+        .error {
+            color: red;
+        }
+        .login-link {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form method="post" action="{{ url_for('signup') }}">
+            {% if error %}
+            <p class="error">{{ error }}</p>
+            {% endif %}
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" value="{{ request.form.first_name or '' }}" required>
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" value="{{ request.form.last_name or '' }}" required>
+            <label for="email">Email:</label>
+            <input type="email" name="email" value="{{ request.form.email or '' }}" required>
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" name="confirm_password" required>
+            <button type="submit">Sign Up</button>
+            <!-- Link to the login page for existing users -->
+            <div class="login-link">
+                Already have an account? <a href="{{ url_for('login') }}">Log in</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
